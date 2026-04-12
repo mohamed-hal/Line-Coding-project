@@ -32,3 +32,48 @@ for i = 1:500
     tx_column = reshape(tx_matrix, 800, 1);
     ensemble_RZ(i,:) = tx_column;
 end
+%% ------------------------PLOTTING FIRST 2 WAVEFORMS------------------------
+t = 0:10:799*10;  % time axis in ms (800 samples, each 10ms apart)
+
+figure;
+
+% --- Unipolar ---
+subplot(3,2,1);
+plot(t, ensemble_uni(1,:), 'b', 'LineWidth', 1.5);
+title('Unipolar - Waveform 1');
+xlabel('Time (ms)'); ylabel('Amplitude');
+ylim([-1 5]); grid on;
+
+subplot(3,2,2);
+plot(t, ensemble_uni(2,:), 'b', 'LineWidth', 1.5);
+title('Unipolar - Waveform 2');
+xlabel('Time (ms)'); ylabel('Amplitude');
+ylim([-1 5]); grid on;
+
+% --- Polar NRZ ---
+subplot(3,2,3);
+plot(t, ensemble_NRZ(1,:), 'r', 'LineWidth', 1.5);
+title('Polar NRZ - Waveform 1');
+xlabel('Time (ms)'); ylabel('Amplitude');
+ylim([-5 5]); grid on;
+
+subplot(3,2,4);
+plot(t, ensemble_NRZ(2,:), 'r', 'LineWidth', 1.5);
+title('Polar NRZ - Waveform 2');
+xlabel('Time (ms)'); ylabel('Amplitude');
+ylim([-5 5]); grid on;
+
+% --- Return to Zero ---
+subplot(3,2,5);
+plot(t, ensemble_RZ(1,:), 'g', 'LineWidth', 1.5);
+title('RZ - Waveform 1');
+xlabel('Time (ms)'); ylabel('Amplitude');
+ylim([-5 5]); grid on;
+
+subplot(3,2,6);
+plot(t, ensemble_RZ(2,:), 'g', 'LineWidth', 1.5);
+title('RZ - Waveform 2');
+xlabel('Time (ms)'); ylabel('Amplitude');
+ylim([-5 5]); grid on;
+
+sgtitle('First 2 Waveforms for Each Line Code');
