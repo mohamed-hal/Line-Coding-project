@@ -10,7 +10,7 @@ function Mean_autocorrelation_OneWaveform(ensemble, title_name)
     plot(lag_samples * Ts, Rx_time, 'LineWidth', 1.3);
     title(title_name);
     xlabel('\tau (s)');
-    ylabel('R_x(\tau)');
+    ylabel('< x(t) . x(t + \tau) >');
     grid on;
 
     fprintf('%s — Time mean of one waveform: %.4f\n', title_name, time_mean);

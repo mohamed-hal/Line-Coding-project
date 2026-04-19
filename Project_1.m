@@ -35,66 +35,23 @@ for i = 1:500
     shift = randi([0,7]);
     ensemble_RZ(i,:) = tx_column(shift+1 : shift+800);
 end
-%% ------------------------PLOTTING FIRST 2 WAVEFORMS------------------------
-t = 0:10:799*10;  % time axis in ms (800 samples, each 10ms apart)
-
-figure;
-
-% --- Unipolar ---
-subplot(3,2,1);
-plot(t, ensemble_uni(1,:), 'b', 'LineWidth', 1.5);
-title('Unipolar - Waveform 1');
-xlabel('Time (ms)'); ylabel('Amplitude');
-ylim([-1 5]); grid on;
-
-subplot(3,2,2);
-plot(t, ensemble_uni(2,:), 'b', 'LineWidth', 1.5);
-title('Unipolar - Waveform 2');
-xlabel('Time (ms)'); ylabel('Amplitude');
-ylim([-1 5]); grid on;
-
-% --- Polar NRZ ---
-subplot(3,2,3);
-plot(t, ensemble_NRZ(1,:), 'r', 'LineWidth', 1.5);
-title('Polar NRZ - Waveform 1');
-xlabel('Time (ms)'); ylabel('Amplitude');
-ylim([-5 5]); grid on;
-
-subplot(3,2,4);
-plot(t, ensemble_NRZ(2,:), 'r', 'LineWidth', 1.5);
-title('Polar NRZ - Waveform 2');
-xlabel('Time (ms)'); ylabel('Amplitude');
-ylim([-5 5]); grid on;
-
-% --- Return to Zero ---
-subplot(3,2,5);
-plot(t, ensemble_RZ(1,:), 'g', 'LineWidth', 1.5);
-title('RZ - Waveform 1');
-xlabel('Time (ms)'); ylabel('Amplitude');
-ylim([-5 5]); grid on;
-
-subplot(3,2,6);
-plot(t, ensemble_RZ(2,:), 'g', 'LineWidth', 1.5);
-title('RZ - Waveform 2');
-xlabel('Time (ms)'); ylabel('Amplitude');
-ylim([-5 5]); grid on;
-
-sgtitle('First 2 Waveforms for Each Line Code');
+%% ----------------------- PLOTTING FIRST 2 WAVEFORMS ---------------------
+plot_waveform(ensemble_uni, 'Unipolar',   'b', [-1  5]);
+plot_waveform(ensemble_NRZ, 'Polar NRZ',  'r', [-5  5]);
+plot_waveform(ensemble_RZ,  'Return to Zero', 'g', [-5  5]);
 %% ----------------------- COMPUTING STATISTICAL MEAN ---------------------
-plot_mean(ensemble_uni,"UniPolar Mean");
-plot_mean(ensemble_NRZ,"Polar Non Return To Zero Mean");
-plot_mean(ensemble_RZ,"Polar Return To Zero Mean");
+plot_mean(ensemble_uni,"UniPolar Statistical Mean");
+plot_mean(ensemble_NRZ,"Polar Non Return To Zero Statistical Mean");
+plot_mean(ensemble_RZ,"Polar Return To Zero Statistical Mean");
 %% ----------------------- COMPUTING STATISTICAL AUTOCORRELATION ---------------------
 plot_autocorrelation(ensemble_uni,"UniPolar AUTOCORRELATION");
 plot_autocorrelation(ensemble_NRZ,"Polar Non Return To Zero AUTOCORRELATION");
 plot_autocorrelation(ensemble_RZ,"Polar Return To Zero AUTOCORRELATION");
 %% ----------------------- COMPUTING TIME MEAN AND TIME AUTOCORRELATION OF ONE WAVEFORM ---------------------
-Mean_autocorrelation_OneWaveform(ensemble_uni,"UniPolar ");
-Mean_autocorrelation_OneWaveform(ensemble_NRZ,"Polar Non Return To Zero ");
-Mean_autocorrelation_OneWaveform(ensemble_RZ,"Polar Return To Zero ");
-
+Mean_autocorrelation_OneWaveform(ensemble_uni,"UniPolar Time AutoCorrelation ");
+Mean_autocorrelation_OneWaveform(ensemble_NRZ,"Polar Non Return To Zero Time AutoCorrelation ");
+Mean_autocorrelation_OneWaveform(ensemble_RZ,"Polar Return To Zero Time AutoCorrelation ");
 %% ----------------------- PSD ---------------------
 PSD(ensemble_uni,"UniPolar");
 PSD(ensemble_NRZ,"Polar Non Return To Zero ");
 PSD(ensemble_RZ,"Polar Return To Zero ");
-
